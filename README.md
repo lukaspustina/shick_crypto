@@ -1,5 +1,5 @@
 # Shick Crypto Library
-This library shows how to use [NaCl][NaCl] in form of [libsodium][libsodium] to securely encrypt a message with asymmetrical encryption. 
+This library shows how to use [NaCl][NaCl] in form of [libsodium][libsodium] to securely encrypt a message with asymmetric encryption. 
 
 In German, *Schick!* (pronounced [shick]) means *Send!*. So, clone and start sending securely. You can find Shick Crypto Library
 
@@ -10,7 +10,7 @@ Please feel free to clone and adapt to your needs. If you find any bugs or have 
 
 ## How Does it Work
 
-Shick Crypto Library is just a thin wrapper around libsodium. The main functionality consists of two functions, i.e., `shick_crypto_enc_message` and `shick_crypto_dec_message`. Messages are encrypted and decrypted following the same pattern as used in [GPG](http://en.wikipedia.org/wiki/GNU_Privacy_Guard#Process) by generating a random *symmetric* key, encrypting a message symmetrically, and finally encrypt the random key *asymmetrically*. Since asymmetric encryption is computational more expensive than symmetric encryption, this pattern combines the security and speed of both worlds. In addition, all encryption, i.e., asymmetric and symmetric encryption, is protected by [MACs](http://en.wikipedia.org/wiki/Message_authentication_code) and initialized with [nouces](http://en.wikipedia.org/wiki/Cryptographic_nonce).
+Shick Crypto Library is just a thin wrapper around libsodium. The main functionality consists of two functions, i.e., `shick_crypto_enc_message` and `shick_crypto_dec_message`. Messages are encrypted and decrypted following the same pattern as used in [GPG](http://en.wikipedia.org/wiki/GNU_Privacy_Guard#Process) by generating a random *symmetric* key, encrypting a message symmetricaly, and finally encrypt the random key *asymmetrically*. Since asymmetric encryption is computational more expensive than symmetric encryption, this pattern combines the security and speed of both worlds. In addition, all encryption, i.e., asymmetric and symmetric encryption, is protected by [MACs](http://en.wikipedia.org/wiki/Message_authentication_code) and initialized with [nouces](http://en.wikipedia.org/wiki/Cryptographic_nonce).
 
 ## How to Use
 
@@ -46,7 +46,7 @@ const char* shick_crypto_version()
 void shick_crypto_init()
 ```
 ```
-// Creates an asymmetrical key pair
+// Creates an asymmetric key pair
 int shick_crypto_create_asymmetric_key_pair(secret_key, public_key)
 ```
 ```
