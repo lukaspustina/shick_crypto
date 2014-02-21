@@ -1,0 +1,58 @@
+# Object files
+*.o
+*.ko
+
+# Libraries
+*.lib
+*.a
+
+# Shared objects (inc. Windows DLLs)
+*.dll
+*.so
+*.so.*
+*.dylib
+
+# Executables
+*.exe
+*.out
+*.app
+
+# autoconf and automake
+Makefile
+Makefile.in
+aclocal.m4
+autom4te.cache/
+build-aux/
+config.h
+config.h.in
+config.log
+config.status
+configure
+libtool
+src/.deps/
+src/.libs/
+src/Makefile
+src/Makefile.in
+src/libshickcrypto.la
+src/main
+src/shick_crypto.lo
+stamp-h1
+tests/.deps/
+tests/Makefile
+tests/Makefile.in
+tests/.libs/
+tests/test-suite.log
+acceptancetests
+acceptancetests.log
+acceptancetests.trs
+unittests
+unittests.log
+unittests.trs
+
+# Gcov
+*.gcda
+*.gcno
+*.gcov
+tests/gcov.log
+tests/gcov.trs
+
