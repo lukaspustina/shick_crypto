@@ -66,7 +66,7 @@ int shick_crypto_dec_message(recipient_secret_key, sender_public_key,
 
 ### Example
 
-This example is taken from the acceptance test `test_shick_crypto_asymmetric_crypto_roundtrip` in [tests/acceptancetests.c](https://github.com/lukaspustina/shick_crypto/blob/master/tests/acceptancetests.c). See there for a full example.
+This example is an excerpt from the example in [examples/examples1.c](https://github.com/lukaspustina/shick_crypto/blob/master/examples/example1.c). See there for a full example.
 
 ```
   SC_CHAR message[] = "Shick Crypto Lib"; // Message to send

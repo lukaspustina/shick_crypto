@@ -56,3 +56,8 @@ unittests.trs
 tests/gcov.log
 tests/gcov.trs
 
+# Examples
+examples/.deps/
+examples/.libs/
+examples/example1
+

@@ -1,4 +1,4 @@
-SUBDIRS = src . tests
+SUBDIRS = src . tests examples
 
 MOSTLYCLEANFILES = *.gcda *.gcno *.gcov tests/gcov.log tests/gcov.trs tests/*.xml
 
