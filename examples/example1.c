@@ -1,5 +1,12 @@
 #include "../src/shick_crypto.h"
 
+void printBufferAsHex(SC_CHAR* buffer, SC_LEN buffer_len) {
+  for (int c=0; c < buffer_len; c++) {
+    printf(",0x%02x",(unsigned int) buffer[c]);
+    if (c % 8 == 7) printf("\n");
+  }
+}
+
 int run_example() {
   SC_CHAR message[] = "Shick Crypto Lib";
 
@@ -36,50 +43,14 @@ int run_example() {
 
 
   // Show data on console
-
-  printf("Alice' SK:\n");
-  for (int c=0; c < crypto_box_SECRETKEYBYTES; c++) {
-    printf(",0x%02x",(unsigned int) alice_secret_key[c]);
-    if (c % 8 == 7) printf("\n");
-  }
-  printf("\n");
-  printf("Alice' PK:\n");
-  for (int c=0; c < crypto_box_PUBLICKEYBYTES; c++) {
-    printf(",0x%02x",(unsigned int) alice_public_key[c]);
-    if (c % 8 == 7) printf("\n");
-  }
-  printf("\n");
-  printf("Bobs SK:\n");
-  for (int c=0; c < crypto_box_SECRETKEYBYTES; c++) {
-    printf(",0x%02x",(unsigned int) bob_secret_key[c]);
-    if (c % 8 == 7) printf("\n");
-  }
-  printf("\n");
-  printf("Bobs PK:\n");
-  for (int c=0; c < crypto_box_PUBLICKEYBYTES; c++) {
-    printf(",0x%02x",(unsigned int) bob_public_key[c]);
-    if (c % 8 == 7) printf("\n");
-  }
-  printf("\n");
-  printf("Nonce:\n");
-  for (int c=0; c < crypto_box_NONCEBYTES; c++) {
-    printf(",0x%02x",(unsigned int) nonce[c]);
-    if (c % 8 == 7) printf("\n");
-  }
-  printf("\n");
-  printf("Enc Sym Key:\n");
+  printf("* Alice' SK:\n"); printBufferAsHex(alice_secret_key, crypto_box_SECRETKEYBYTES);
+  printf("* Alice' PK:\n"); printBufferAsHex(alice_public_key, crypto_box_PUBLICKEYBYTES);
+  printf("* Bobs SK:\n"); printBufferAsHex(bob_secret_key, crypto_box_SECRETKEYBYTES);
+  printf("* Bobs PK:\n"); printBufferAsHex(bob_public_key, crypto_box_PUBLICKEYBYTES);
+  printf("* Nonce:\n"); printBufferAsHex(nonce, crypto_box_NONCEBYTES);
   SC_ENC_SYM_KEY key = encrypted_symmetric_keys[0];
-  for (int c=0; c < sizeof(SC_ENC_SYM_KEY); c++) {
-    printf(",0x%02x",(unsigned int) ((SC_CHAR*) &key)[c]);
-    if (c % 8 == 7) printf("\n");
-  }
-  printf("\n");
-  printf("Cipher Text:\n");
-  for (int c=0; c < sizeof ciphertext; c++) {
-    printf(",0x%02x",(unsigned int) ciphertext[c]);
-    if (c % 8 == 7) printf("\n");
-  }
-  printf("\n");
+  printf("* Enc Sym Key:\n"); printBufferAsHex(((SC_CHAR*) &key), sizeof(SC_ENC_SYM_KEY));
+  printf("* Cipher Text:\n"); printBufferAsHex(ciphertext, sizeof ciphertext);
 
   return 0;
 }
