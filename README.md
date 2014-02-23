@@ -10,7 +10,7 @@ Please feel free to clone and adapt to your needs. If you find any bugs or have 
 
 ## How Does it Work
 
-Shick Crypto Library is just a thin wrapper around libsodium. The main functionality consists of two functions, i.e., `shick_crypto_enc_message` and `shick_crypto_dec_message`. Messages are encrypted and decrypted following the same pattern as used in [GPG](http://en.wikipedia.org/wiki/GNU_Privacy_Guard#Process) by generating a random *symmetric* key, encrypting a message symmetricaly, and finally encrypt the random key *asymmetrically*. Since asymmetric encryption is computational more expensive than symmetric encryption, this pattern combines the security and speed of both worlds. In addition, all encryption, i.e., asymmetric and symmetric encryption, is protected by [MACs](http://en.wikipedia.org/wiki/Message_authentication_code) and initialized with [nouces](http://en.wikipedia.org/wiki/Cryptographic_nonce).
+Shick Crypto Library is just a thin wrapper around libsodium. The main functionality consists of two functions, i.e., `shick_crypto_enc_message` and `shick_crypto_dec_message`. Messages are encrypted and decrypted following the same pattern as used in [GPG](http://en.wikipedia.org/wiki/GNU_Privacy_Guard#Process) by generating a random *symmetric* key, encrypting a message symmetrically, and finally encrypt the random key *asymmetrically*. Since asymmetric encryption is computational more expensive than symmetric encryption, this pattern combines the security and speed of both worlds. In addition, all encryption, i.e., asymmetric and symmetric encryption, is protected by [MACs](http://en.wikipedia.org/wiki/Message_authentication_code) and initialized with [nouces](http://en.wikipedia.org/wiki/Cryptographic_nonce). The concrete algorithms used by NaCl are currently [Curve25519](http://en.wikipedia.org/wiki/Curve25519) elliptic curve cryptography for asymmetric encryption, [Salsa20](http://en.wikipedia.org/wiki/Salsa20) for symmetric encryption, and [Poly1305-AES](http://en.wikipedia.org/wiki/Poly1305-AES) for [message authentication code](http://en.wikipedia.org/wiki/Message_authentication_code) (MAC) computation.
 
 ## How to Use
 
@@ -64,6 +64,8 @@ int shick_crypto_dec_message(recipient_secret_key, sender_public_key,
     encrypted_symmetric_key, ciphertext, cipertext_len, nonce, message)
 ```
 
+The results to send to each recipient are the chosen nonce, the encrypted symmetric key for the particular recipient, and the ciphertext.
+
 ### Example
 
 This example is an excerpt from the example in [examples/examples1.c](https://github.com/lukaspustina/shick_crypto/blob/master/examples/example1.c). See there for a full example.
@@ -107,5 +109,5 @@ This example is an excerpt from the example in [examples/examples1.c](https://gi
     encrypted_symmetric_keys[0], ciphertext, sizeof ciphertext, nonce, message_decrypted);
 ```
 
-Send secure.
+Send securely.
 
