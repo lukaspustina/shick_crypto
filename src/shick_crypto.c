@@ -28,7 +28,7 @@ shick_crypto_create_asymmetric_key_pair(SC_CHAR secret_key[crypto_box_SECRETKEYB
 
 void
 shick_create_nonce(SC_CHAR* nonce, int len) {
-  randombytes_buf(nonce, sizeof nonce);
+  randombytes_buf(nonce, len);
 }
 
 int
@@ -42,7 +42,7 @@ shick_crypto_enc_message(const SC_CHAR sender_secret_key[crypto_box_SECRETKEYBYT
                          SC_CHAR* ciphertext) {
   int failed = 0;
 
-  // Create symmetrical key
+  // Create symmetric key
   SC_SYM_KEY sym_key;
   randombytes_buf((void*) sym_key.key, sizeof sym_key.key);
   randombytes_buf((void*) sym_key.nonce, sizeof sym_key.nonce);
@@ -51,13 +51,13 @@ shick_crypto_enc_message(const SC_CHAR sender_secret_key[crypto_box_SECRETKEYBYT
   failed = crypto_secretbox_easy(ciphertext, message, message_len, sym_key.nonce, sym_key.key);
   if (failed) return SC_ENC_SYM_FAILED;
 
-  // Encrypt symmetrical key asymmetrically for each recipient
+  // Encrypt symmetric key asymmetrically for each recipient
   for (int i = 0; i < amount_of_recipients; i++) {
     SC_CHAR public_key[crypto_box_PUBLICKEYBYTES];
     memcpy(public_key, recipient_public_keys[i], crypto_box_PUBLICKEYBYTES);
-    failed += crypto_box_easy((SC_CHAR*) &encrypted_symmetric_keys[i], (SC_CHAR*) &sym_key, sizeof sym_key, nonce, public_key, sender_secret_key);
+    failed = crypto_box_easy((SC_CHAR*) &encrypted_symmetric_keys[i], (SC_CHAR*) &sym_key, sizeof sym_key, nonce, public_key, sender_secret_key);
+    if (failed) return SC_ENC_ASYM_FAILED;
   }
-  if (failed) return SC_ENC_ASYM_FAILED;
 
   return 0;
 }
@@ -74,11 +74,11 @@ shick_crypto_dec_message(const SC_CHAR recipient_secret_key[crypto_box_SECRETKEY
   SC_CHAR buffer[sizeof(SC_SYM_KEY)];
   SC_SYM_KEY* sym_key;
 
-  // Decrypt symmetrical key 
+  // Decrypt symmetric key 
   failed = crypto_box_open_easy(buffer, (SC_CHAR*) &encrypted_symmetric_key, sizeof encrypted_symmetric_key, nonce, sender_public_key, recipient_secret_key);
   if (failed) return SC_DEC_ASYM_FAILED;
 
-  // Decrypt message with symmetrical key
+  // Decrypt message with symmetric key
   sym_key = (SC_SYM_KEY*) buffer;
   failed = crypto_secretbox_open_easy(message, ciphertext, ciphertext_len, sym_key->nonce, sym_key->key);
   if (failed) return SC_DEC_SYM_FAILED;
