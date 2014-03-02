@@ -4,7 +4,7 @@ notifications:
     - travis-ci@pustina.net
 install:
   - sudo apt-get install -y check git
-  - OLD_PWD=`pwd`; cd /tmp; git clone https://github.com/jedisct1/libsodium.git; cd libsodium; autoreconf --install && ./configure --prefix=/usr && make && sudo make install; cd $OLD_PWD
+  - OLD_PWD=`pwd`; cd /tmp; git clone https://github.com/jedisct1/libsodium.git; cd libsodium; autoreconf --install && ./configure --prefix=/usr --enable-blocking-random && make && sudo make install; cd $OLD_PWD
 script: autoreconf --install && ./configure && make && make check
 compiler:
   - clang

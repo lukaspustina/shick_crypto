@@ -19,7 +19,7 @@ Shick Crypto Library is just a thin wrapper around libsodium. The main functiona
 1. Crypto library [NaCl][NaCl] in form of [libsodium][libsodium]
 2. C unit testing library [Check](http://en.wikipedia.org/wiki/Cryptographic_nonce)
 
-Check is usually available on all Linux distributions and in [Homebrew](http://en.wikipedia.org/wiki/Cryptographic_nonce). libsodium might be available, but please make sure you use a recent version. It is easy to install from source -- see their [Readme](https://github.com/jedisct1/libsodium/blob/master/README.markdown).
+Check is usually available on all Linux distributions and in [Homebrew](http://en.wikipedia.org/wiki/Cryptographic_nonce). libsodium might be available, but please make sure you use a recent version. It is easy to install from source -- see their [Readme](https://github.com/jedisct1/libsodium/blob/master/README.markdown). If you compile from source, please make sure to pass the parameter `--enable-blocking-random` to `./configure` in order to use `/dev/random` for random number generation.
 
 [NaCl]:http://nacl.cace-project.eu
 [libsodium]:https://github.com/jedisct1/libsodium
